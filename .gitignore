@@ -1,0 +1,32 @@
+# Godot 4+ specific ignores
+.godot/
+/android/
+
+# Godot generated files
+.godot/
+
+# Godot Mono / C# generated files
+.mono/
+
+# Imported/generated files
+.import/
+
+# Exported builds
+build/
+builds/
+export/
+exports/
+
+# Linux
+*~
+.directory
+
+# Windows
+Thumbs.db
+Desktop.ini
+
+# macOS
+.DS_Store
+
+# VS Code
+.vscode/

@@ -1,0 +1,99 @@
+[gd_scene format=3 uid="uid://b8skasi27xhel"]
+
+[ext_resource type="Shader" uid="uid://d3k373lx8bb0g" path="res://main.gdshader" id="1_h2yge"]
+[ext_resource type="Script" uid="uid://ch04nsudtxocn" path="res://nova1.gd" id="1_ig7tw"]
+[ext_resource type="Script" uid="uid://dipvelyoo6edf" path="res://orbit.gd" id="2_0xm2m"]
+
+[sub_resource type="Environment" id="Environment_0xm2m"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0xm2m"]
+render_priority = 0
+shader = ExtResource("1_h2yge")
+
+[sub_resource type="SphereMesh" id="SphereMesh_h2yge"]
+flip_faces = true
+radius = 1.0
+height = 2.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rs1r3"]
+albedo_color = Color(1, 1, 0.85490197, 1)
+emission_enabled = true
+emission = Color(0.8901961, 0.8901961, 0.76862746, 1)
+emission_energy_multiplier = 16.0
+grow_amount = -0.03
+
+[sub_resource type="SphereMesh" id="SphereMesh_7x0ad"]
+
+[sub_resource type="Curve" id="Curve_efxa6"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.10638299, 0), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h2yge"]
+stencil_flags = 2
+
+[sub_resource type="RibbonTrailMesh" id="RibbonTrailMesh_5vw27"]
+material = SubResource("StandardMaterial3D_h2yge")
+sections = 2
+curve = SubResource("Curve_efxa6")
+
+[sub_resource type="FontFile" id="FontFile_0xm2m"]
+cache/0/variation_coordinates = {}
+cache/0/face_index = 0
+cache/0/embolden = 0.0
+cache/0/transform = Transform2D(1, 0, 0, 1, 0, 0)
+cache/0/spacing_top = 0
+cache/0/spacing_bottom = 0
+cache/0/spacing_space = 0
+cache/0/spacing_glyph = 0
+cache/0/baseline_offset = 0.0
+cache/0/16/0/ascent = 0.0
+cache/0/16/0/descent = 0.0
+cache/0/16/0/underline_position = 0.0
+cache/0/16/0/underline_thickness = 0.0
+cache/0/16/0/scale = 1.0
+cache/0/64/0/ascent = 0.0
+cache/0/64/0/descent = 0.0
+cache/0/64/0/underline_position = 0.0
+cache/0/64/0/underline_thickness = 0.0
+cache/0/64/0/scale = 1.0
+
+[node name="Resonance" type="Node3D" unique_id=844590779]
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=630493332]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6.3)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=132899924]
+environment = SubResource("Environment_0xm2m")
+
+[node name="Nova" type="MeshInstance3D" parent="." unique_id=980655280]
+material_override = SubResource("ShaderMaterial_0xm2m")
+mesh = SubResource("SphereMesh_h2yge")
+script = ExtResource("1_ig7tw")
+
+[node name="Core" type="MeshInstance3D" parent="Nova" unique_id=1742248242]
+material_override = SubResource("StandardMaterial3D_rs1r3")
+mesh = SubResource("SphereMesh_7x0ad")
+
+[node name="Energy" type="MeshInstance3D" parent="Nova" unique_id=88222180]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+mesh = SubResource("RibbonTrailMesh_5vw27")
+
+[node name="NovaLight" type="OmniLight3D" parent="Nova" unique_id=737078154]
+transform = Transform3D(1.3333334, 0, 0, 0, 1.3333334, 0, 0, 0, 1.3333334, 0, 0, 0)
+light_energy = 4.0
+omni_range = 10.0
+
+[node name="AbsorbTarget" type="Marker3D" parent="Nova" unique_id=2092928277]
+
+[node name="Orbit" type="Node3D" parent="." unique_id=1544501953]
+transform = Transform3D(0.9396926, 0.088521324, 0.33036608, 0, 0.9659258, -0.25881904, -0.34202012, 0.24321035, 0.90767336, 0, 0, 0)
+script = ExtResource("2_0xm2m")
+
+[node name="Glyph" type="Label3D" parent="Orbit" unique_id=2132684047]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0)
+billboard = 1
+modulate = Color(0.41304347, 0.9999997, 0.79606456, 1)
+font = SubResource("FontFile_0xm2m")
+font_size = 150
+outline_size = 21
+horizontal_alignment = 0
